@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 @NoArgsConstructor
 public class UserFollowDTO {
     private UserRepository userRepository;
+
     private Long id;
 
     private String nickname;

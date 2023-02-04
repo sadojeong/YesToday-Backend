@@ -1,11 +1,14 @@
 package dev.yestoday.yestoday.core.user.application;
 
+import dev.yestoday.yestoday.core.follow.domain.Follow;
+import dev.yestoday.yestoday.core.follow.dto.FollowerRequest;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -43,5 +46,22 @@ public class UserService {
         return user;
     }
 
+    // 팔로우 관련 Method
+    public int getNumberOfFollowing(Long id) {
+        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
+        return user.getFollowings().size();
+    }
+
+    public List<FollowerRequest> getFollowingsById(Long id) {
+        List<FollowerRequest> returnFollowings = new ArrayList<>();
+        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
+        List<Follow> followings = user.getFollowings();
+
+        for (Follow following: followings
+        ) {
+            returnFollowings.add(new FollowerRequest(following));
+        }
+        return returnFollowings;
+    }
 
 }

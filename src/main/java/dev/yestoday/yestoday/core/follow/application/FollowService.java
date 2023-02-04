@@ -26,9 +26,8 @@ public class FollowService {
         return followRepository.findAll();
     }
 
-    public List<Follow> save(FollowDTO newFollow) {
-        followRepository.save(newFollow.toFollowEntity());
-        return followRepository.findAll();
+    public void save(Follow newFollow) {
+        followRepository.save(newFollow);
     }
 
     public List<Follow> delete(Long id){

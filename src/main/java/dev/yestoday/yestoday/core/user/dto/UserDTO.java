@@ -33,7 +33,6 @@ public class UserDTO {
         this.imageUrl = imageUrl;
         this.followings = followings;
         this.posts = posts;
-
     }
 
     public User toUserEntity() {

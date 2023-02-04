@@ -25,8 +25,8 @@ public class FollowRestController {
     }
 
     @PostMapping
-    public List<Follow> save(@RequestBody FollowDTO newFollow) {
-        return followService.save(newFollow);
+    public void save(@RequestBody Follow newFollow) {
+        followService.save(newFollow);
     }
 
     @DeleteMapping(path = "/{followId}")

@@ -1,5 +1,6 @@
 package dev.yestoday.yestoday.web.controller;
 
+import dev.yestoday.yestoday.core.follow.dto.FollowerRequest;
 import dev.yestoday.yestoday.core.user.application.UserService;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
@@ -36,6 +37,9 @@ public class UserRestController {
 
     @GetMapping("bynickname/{nickname}") // users?username=jung
     public User findByNickname(@PathVariable String nickname) {return userService.findByNickname(nickname);}
+
+    @GetMapping("following-members/{id}")
+    public List<FollowerRequest> getFollowingsById(@PathVariable Long id) {return userService.getFollowingsById(id);}
 
     @PostMapping
     public List<User> save(@RequestBody UserDTO newUser) {

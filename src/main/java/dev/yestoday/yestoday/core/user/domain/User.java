@@ -52,6 +52,5 @@ public class User {
         this.imageUrl = imageUrl;
         this.followings = followings;
         this.posts = posts;
-
     }
 }
