@@ -2,6 +2,8 @@ package dev.yestoday.yestoday.core.user.application;
 
 import dev.yestoday.yestoday.core.follow.domain.Follow;
 import dev.yestoday.yestoday.core.follow.dto.FollowerRequest;
+import dev.yestoday.yestoday.core.post.domain.Post;
+import dev.yestoday.yestoday.core.post.dto.PostResponse;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
@@ -21,30 +23,43 @@ public class UserService {
 
     public UserService(UserRepository userRepository) { this.userRepository = userRepository; }
 
-    public List<User> findAll() { return userRepository.findAll(); }
+    public List<UserDTO> findAll() {
+        List<User> users = userRepository.findAll();
 
-    public List<User> save(UserDTO newUser) {
+        List<UserDTO> returnUsers = new ArrayList<>();
+
+        for (User user : users
+             ) {
+            returnUsers.add(new UserDTO(user));
+        }
+
+        return returnUsers;
+    }
+
+    public void save(UserDTO newUser) {
         userRepository.save(newUser.toUserEntity());
-        return userRepository.findAll();
     }
 
-    public List<User> delete(Long id){
+    public void delete(Long id){
         userRepository.deleteById(id);
-        return userRepository.findAll();
     }
 
-    public User findById(Long id) {
+    public User dtoToUser(UserDTO userDTO) {
+        return userRepository.findById(userDTO.getId()).orElseThrow(()->new NoSuchElementException());
+    }
+
+    public UserDTO findById(Long id) {
         String message = String.format("%s에 해당하는 User 가 없습니다.", id);
 
         User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException(message));
-        return user;
+        return new UserDTO(user);
     }
 
-    public User findByNickname(String nickname) {
+    public UserDTO findByNickname(String nickname) {
         String message = String.format("%s에 해당하는 User 가 없습니다.", nickname);
         System.out.println(nickname);
         User user = userRepository.findByNickname(nickname).orElseThrow(()->new NoSuchElementException(message));
-        return user;
+        return new UserDTO(user);
     }
 
     // 팔로우 관련 Method
@@ -65,8 +80,22 @@ public class UserService {
         return returnFollowings;
     }
 
-    public List<User> findByNicknameContaining(String nickname){
+
+    public List<User> findByNicknameContaining(String nickname) {
         return userRepository.findByNicknameContaining(nickname);
+    }
+
+    public List<PostResponse> getPostsById(Long id) {
+        List<PostResponse> returnPosts = new ArrayList<>();
+        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
+        List<Post> posts = user.getPosts();
+
+        for (Post post: posts
+        ) {
+            returnPosts.add(new PostResponse(post));
+        }
+        return returnPosts;
+
     }
 
 }

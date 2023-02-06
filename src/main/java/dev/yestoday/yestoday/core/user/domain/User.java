@@ -3,6 +3,7 @@ package dev.yestoday.yestoday.core.user.domain;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import dev.yestoday.yestoday.core.follow.domain.Follow;
 import dev.yestoday.yestoday.core.post.domain.Post;
+import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -36,10 +37,8 @@ public class User {
     private String imageUrl;
     @OneToMany(mappedBy = "user")
     private List<Follow> followings;
-
-    @JsonManagedReference(value = "user-post")
-    @OneToMany(mappedBy = "user",cascade=CascadeType.ALL, targetEntity = Post.class)
-    private List<Post> posts = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
     @Builder
     public User(String nickname, String password, String name, String email, String description, String phoneNumber,  String imageUrl, List<Follow> followings, List<Post> posts){

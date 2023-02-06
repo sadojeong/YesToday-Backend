@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 public class TodoDTO {
@@ -14,14 +16,16 @@ public class TodoDTO {
     private String name;
     private boolean completeState;
     private String todoDescription;
+    private LocalDate todoDate;
 
     @Builder
-    public TodoDTO(User user,Long userId, String name, boolean completeState, String todoDescription){
+    public TodoDTO(User user,Long userId, String name, boolean completeState, String todoDescription, LocalDate todoDate){
         this.user = user;
         this.userId = userId;
         this.name = name;
         this.completeState = completeState;
         this.todoDescription = todoDescription;
+        this.todoDate = todoDate;
     }
 
     public Todo toTodoEntity(){
@@ -31,6 +35,7 @@ public class TodoDTO {
                 .name(name)
                 .completeState(completeState)
                 .todoDescription(todoDescription)
+                .todoDate(todoDate)
                 .build();
     }
 }
