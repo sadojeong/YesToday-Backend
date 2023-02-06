@@ -54,10 +54,10 @@ public class TodoService {
         return todo;
     }
 
-    public List<Todo> findByUserIdAndRegistrationDate(int userId, LocalDate registrationDate){
+    public List<Todo> findByUserIdAndTodoDate(Long userId, LocalDate todoDate){
         String message = String.format("%s에 해당하는 오늘의 todo가 없습니다.", userId);
 
-        List<Todo> todos = todoRepository.findByUserIdAndRegistrationDate(userId, registrationDate);
+        List<Todo> todos = todoRepository.findByUserIdAndTodoDate(userId, todoDate);
 
         if(todos.isEmpty()){
             new NoSuchElementException(message);

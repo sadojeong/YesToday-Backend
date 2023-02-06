@@ -17,6 +17,7 @@ import java.util.NoSuchElementException;
 
 @Service
 public class UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -79,6 +80,11 @@ public class UserService {
         return returnFollowings;
     }
 
+
+    public List<User> findByNicknameContaining(String nickname) {
+        return userRepository.findByNicknameContaining(nickname);
+    }
+
     public List<PostResponse> getPostsById(Long id) {
         List<PostResponse> returnPosts = new ArrayList<>();
         User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
@@ -89,6 +95,7 @@ public class UserService {
             returnPosts.add(new PostResponse(post));
         }
         return returnPosts;
+
     }
 
 }

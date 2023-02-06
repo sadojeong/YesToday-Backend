@@ -26,6 +26,8 @@ public class PostService {
     public List<Post> findAll() { return postRepository.findAll(); }
 
     public void save(Post newPost) {
+        User user  = userRepository.findById(newPost.getUserId()).get();
+        newPost.setUser(user);
         postRepository.save(newPost);
     }
 

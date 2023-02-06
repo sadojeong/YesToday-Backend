@@ -49,12 +49,14 @@ public class Post {
     @Column(name = "comment_numbers" , nullable = true)
     @ColumnDefault("0")
     private Long commentNumbers;
-//    @Column(name = "feed_datetime")
-//    private LocalDateTime feedDateTime;
+
+    @Column(name = "post_datetime" , nullable = false)
+    private LocalDateTime postDateTime;
+
 
     @Builder
     public Post(Long todoId, String todoName, User user, Long userId , String content, String imageUrl,
-                String imageType, Long likeNumbers, Long commentNumbers, LocalDateTime feedDateTime){
+                String imageType, Long likeNumbers, Long commentNumbers, LocalDateTime postDateTime){
         this.todoId = todoId;
         this.todoName = todoName;
         this.user = user;
@@ -64,5 +66,7 @@ public class Post {
         this.imageType = imageType;
         this.likeNumbers =  likeNumbers;
         this.commentNumbers = commentNumbers;
+        this.postDateTime = postDateTime;
+
     }
 }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @ToString
-public class Todo extends BaseTimeEntity {
+public class Todo {
     //투두 id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,13 +44,16 @@ public class Todo extends BaseTimeEntity {
     @Column(name = "todo_description", nullable = true)
     private String todoDescription;
 
+    @Column(name="todo_date",nullable = false)
+    private LocalDate todoDate;
+
     @Builder
-    public Todo(User user, Long userId, String name, boolean completeState, String todoDescription ,LocalDate registrationDate) {
+    public Todo(User user, Long userId, String name, boolean completeState, String todoDescription ,LocalDate todoDate) {
         this.user = user;
         this.userId = userId;
         this.name = name;
         this.completeState = completeState;
         this.todoDescription = todoDescription;
-//        this.registrationDate = registrationDate;
+        this.todoDate = todoDate;
     }
 }

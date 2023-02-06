@@ -31,6 +31,8 @@ public class PostRestController {
 
     @PostMapping
     public void save(@RequestBody Post newPost) {
+        System.out.println(newPost.getUserId());
+        System.out.println(newPost.getUser());
         postService.save(newPost);
     }
 

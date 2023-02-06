@@ -26,11 +26,11 @@ public class PostDTO {
     private String imageType;
     private Long likeNumbers;
     private Long commentNumbers;
-    private LocalDateTime feedDateTime;
+    private LocalDateTime postDateTime;
 
     @Builder
     public PostDTO(Long todoId, String todoName, User user, Long userId, String content,
-                   String imageUrl, String imageType, Long likeNumbers, Long commentNumbers, LocalDateTime feedDateTime){
+                   String imageUrl, String imageType, Long likeNumbers, Long commentNumbers, LocalDateTime postDateTime){
         this.todoId = todoId;
         this.todoName = todoName;
         this.user = user;
@@ -40,7 +40,7 @@ public class PostDTO {
         this.imageType = imageType;
         this.likeNumbers = likeNumbers;
         this.commentNumbers = commentNumbers;
-        this.feedDateTime = feedDateTime;
+        this.postDateTime = postDateTime;
     }
 
     public Post toPostEntity(){
@@ -54,7 +54,7 @@ public class PostDTO {
                 .imageType(imageType)
                 .likeNumbers(likeNumbers)
                 .commentNumbers(commentNumbers)
-                .feedDateTime(feedDateTime)
+                .postDateTime(postDateTime)
                 .build();
     }
 }
