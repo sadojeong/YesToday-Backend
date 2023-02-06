@@ -1,6 +1,7 @@
 package dev.yestoday.yestoday.web.controller;
 
 import dev.yestoday.yestoday.core.post.dto.PostDTO;
+import dev.yestoday.yestoday.core.post.dto.PostResponse;
 import dev.yestoday.yestoday.core.user.application.UserService;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.post.application.PostService;
@@ -27,12 +28,12 @@ public class PostRestController {
     @GetMapping
     public List<Post> findAll() {return postService.findAll();}
 
-    @PostMapping
-    public List<Post> save(@RequestBody PostDTO newPost) {
-        User user = userService.findById(newPost.getUserId());
-        newPost.setUser(user);
 
-        return postService.save(newPost);
+    @PostMapping
+    public void save(@RequestBody Post newPost) {
+        System.out.println(newPost.getUserId());
+        System.out.println(newPost.getUser());
+        postService.save(newPost);
     }
 
     @DeleteMapping(path = "/{id}")

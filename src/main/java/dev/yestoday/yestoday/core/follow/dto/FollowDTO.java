@@ -23,13 +23,4 @@ public class FollowDTO {
         this.followUser = followUser;
         this.followUserId = followUserId;
     }
-
-    public Follow toFollowEntity() {
-        return Follow.builder()
-                .user(user.toUserEntity())
-//                .userId(userId)
-                .followUser(followUser.toUserEntity())
-//                .followUserId(followUserId)
-                .build();
-    }
 }

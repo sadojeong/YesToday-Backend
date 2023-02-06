@@ -30,6 +30,14 @@ public class FollowService {
         followRepository.save(newFollow);
     }
 
+    public int numberOfFollower(Long id) {
+        User user = userRepository.findById(id).orElseThrow();
+
+        List<Follow> follower = followRepository.findAllByFollowUser(user).orElseThrow();
+
+        return follower.size();
+    }
+
     public List<Follow> delete(Long id){
         followRepository.deleteById(id);
         return followRepository.findAll();

@@ -25,13 +25,10 @@ public class PostService {
 
     public List<Post> findAll() { return postRepository.findAll(); }
 
-    public List<Post> save(PostDTO newPost) {
-        User user = userRepository.findById(newPost.getUserId()).get();
+    public void save(Post newPost) {
+        User user  = userRepository.findById(newPost.getUserId()).get();
         newPost.setUser(user);
-
-        System.out.println(newPost);
-        postRepository.save(newPost.toPostEntity());
-        return postRepository.findAll();
+        postRepository.save(newPost);
     }
 
     public List<Post> delete(Long id){

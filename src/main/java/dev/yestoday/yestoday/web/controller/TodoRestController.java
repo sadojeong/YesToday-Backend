@@ -8,8 +8,10 @@ import dev.yestoday.yestoday.core.todo.infrastrucuture.TodoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j //logging 남기는 어노테이션
@@ -66,6 +68,12 @@ public class TodoRestController {
         return service.delete(id);
 
     }
+
+    @GetMapping(path="users/{userId}/todo-date/{todoDate}")
+    public List<Todo> findByUserIdAndTodoDate(@PathVariable("userId")Long userId, @PathVariable("todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate todoDate){
+        return service.findByUserIdAndTodoDate(userId, todoDate);
+    }
+
 
 
 }

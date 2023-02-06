@@ -24,6 +24,11 @@ public class FollowRestController {
         return followService.findAll();
     }
 
+    @GetMapping("number-of-follower/{id}")
+    public int getNumberOfFollwer(@PathVariable Long id) {
+        return followService.numberOfFollower(id);
+    }
+
     @PostMapping
     public void save(@RequestBody Follow newFollow) {
         followService.save(newFollow);
