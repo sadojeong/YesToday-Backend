@@ -27,24 +27,25 @@ public class CommentRestController {
     }
 
     @PostMapping
-    public List<Comment> save(@RequestBody CommentDTO newComment){
+    public void save(@RequestBody Comment newComment){
         log.debug("--POST: localhost:8080/api/feeds, save() called");
         log.debug("--@RequestBody Feed: {}", newComment);
 
-        return service.save(newComment);
+        service.save(newComment);
 
     }
 
     @DeleteMapping(path = "/{commentId}")
-    public List<Comment> delete(@PathVariable("commentId") Long commentId){
+    public void delete(@PathVariable("commentId") Long commentId){
         log.debug("--POST: localhost:8080/api/feeds, delete() called");
         log.debug("--@RequestParam feedID: {}",commentId);
-        return service.delete(commentId);
+        service.delete(commentId);
 
     }
 
-    @GetMapping(path = "feeds/{feedId}")
-    public List<Comment> findByFeedId(@PathVariable("feedId")Long feedId){
-        return service.findByPostId(feedId);
+    @GetMapping(path = "posts/{postId}")
+    public List<CommentDTO> findByFeedId(@PathVariable("postId")Long postId){
+        List<CommentDTO> comments = service.findByPostId(postId);
+        return comments;
     }
 }

@@ -12,11 +12,15 @@ public class PostResponse {
 
     private Long userId;
     @JsonProperty
+    private Long todoId;
+    @JsonProperty
     private String todoName;
     @JsonProperty
     private String content;
     @JsonProperty
     private String imageUrl;
+    @JsonProperty
+    private String imageType;
     @JsonProperty
     private Long likeNumbers;
     @JsonProperty
@@ -30,8 +34,10 @@ public class PostResponse {
         this.todoName = post.getTodoName();
         this.content = post.getContent();
         this.imageUrl = post.getImageUrl();
+        this.imageType = post.getImageType();
         this.likeNumbers = post.getLikeNumbers();
         this.commentNumbers = post.getCommentNumbers();
         this.postDateTime = post.getPostDateTime();
+        this.todoId = post.getTodoId();
     }
 }
