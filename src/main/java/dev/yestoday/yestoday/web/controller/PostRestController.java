@@ -42,7 +42,8 @@ public class PostRestController {
     }
 
     @PutMapping
-    public List<Post> update(@RequestBody PostDTO updatePost){
-        return postService.update(updatePost);
+    public void update(@RequestBody PostDTO updatePost){
+        System.out.println(updatePost);
+        postService.update(updatePost);
     }
 }

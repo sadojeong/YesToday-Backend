@@ -81,8 +81,15 @@ public class UserService {
     }
 
 
-    public List<User> findByNicknameContaining(String nickname) {
-        return userRepository.findByNicknameContaining(nickname);
+    public List<UserDTO> findByNicknameContaining(String nickname) {
+        List<User> users = userRepository.findByNicknameContaining(nickname);
+        List<UserDTO> returnUsers = new ArrayList<>();
+
+        for (User user: users
+             ) {
+            returnUsers.add(new UserDTO(user));
+        }
+        return returnUsers;
     }
 
     public List<PostResponse> getPostsById(Long id) {

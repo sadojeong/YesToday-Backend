@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "posts")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
-@AllArgsConstructor
+
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,8 +55,9 @@ public class Post {
 
 
     @Builder
-    public Post(Long todoId, String todoName, User user, Long userId , String content, String imageUrl,
+    public Post(Long id, Long todoId, String todoName, User user, Long userId , String content, String imageUrl,
                 String imageType, Long likeNumbers, Long commentNumbers, LocalDateTime postDateTime){
+        this.id = id;
         this.todoId = todoId;
         this.todoName = todoName;
         this.user = user;

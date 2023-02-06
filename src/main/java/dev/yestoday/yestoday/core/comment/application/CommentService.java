@@ -5,10 +5,12 @@ import dev.yestoday.yestoday.core.comment.dto.CommentDTO;
 import dev.yestoday.yestoday.core.comment.infrastructure.CommentRepository;
 import dev.yestoday.yestoday.core.post.infrastructure.PostRepository;
 import dev.yestoday.yestoday.core.user.domain.User;
+import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,24 +30,30 @@ public class CommentService {
         return commentRepository.findAll();
     }
 
-    public List<Comment> save(CommentDTO newComment){
-        User user = userRepository.findById(newComment.getUserId()).get();
-        newComment.setUser(user);
+    public void save(Comment newComment){
+        newComment.setUser(userRepository.findById(newComment.getUserId()).get());
+
 //
 //        Feed feed = feedRepository.findById(newComment.getFeedId()).get();
 //        newComment.setFeed(feed);
 
-        commentRepository.save(newComment.toCommentEntity());
-        return commentRepository.findAll();
+        commentRepository.save(newComment);
+
     }
 
-    public List<Comment> delete(Long commentId){
+    public void delete(Long commentId){
         commentRepository.deleteById(commentId);
-        return commentRepository.findAll();
+
     }
 
-    public List<Comment> findByPostId(Long postId){
+    public List<CommentDTO> findByPostId(Long postId){
+        List<Comment> comments = commentRepository.findByPostId(postId);
+        List<CommentDTO> returnComments = new ArrayList<>();
 
-        return  commentRepository.findByPostId(postId);
+        for (Comment comment: comments
+             ) {
+            returnComments.add(new CommentDTO(comment));
+        }
+        return  returnComments;
     }
 }

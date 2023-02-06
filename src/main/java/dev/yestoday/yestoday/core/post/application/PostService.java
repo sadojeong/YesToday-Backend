@@ -36,10 +36,15 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public List<Post> update(PostDTO newPost){
+    public void update(PostDTO newPost){
+        Post updatePost = postRepository.findById(newPost.getId()).get();
         User user = userRepository.findById(newPost.getUserId()).get();
-        newPost.setUser(user);
-        postRepository.save(newPost.toPostEntity());
-        return postRepository.findAll();
+        updatePost.setUser(user);
+
+        updatePost.setContent(newPost.getContent());
+        updatePost.setImageUrl(newPost.getImageUrl());
+        updatePost.setImageType(newPost.getImageType());
+        postRepository.save(updatePost);
+
     }
 }

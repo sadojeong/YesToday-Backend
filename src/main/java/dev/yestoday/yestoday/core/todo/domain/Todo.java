@@ -1,5 +1,6 @@
 package dev.yestoday.yestoday.core.todo.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.yestoday.yestoday.core.user.domain.User;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -20,6 +21,7 @@ public class Todo {
     @Column(name = "todo_id")
     private Long id;
 
+    @JsonBackReference
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name="user_id")
     private User user;
