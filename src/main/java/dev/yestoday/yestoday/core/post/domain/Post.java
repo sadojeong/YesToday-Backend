@@ -40,7 +40,7 @@ public class Post {
 
     @Column(name = "img_Url", nullable = false)
     private String imageUrl;
-    @Column(name="img_type", nullable = false)
+    @Column(name="img_type")
     private String imageType;
 
     @Column(name = "like_numbers" , nullable = true)
@@ -49,8 +49,8 @@ public class Post {
     @Column(name = "comment_numbers" , nullable = true)
     @ColumnDefault("0")
     private Long commentNumbers;
-    @Column(name = "feed_datetime" , nullable = false)
-    private LocalDateTime feedDateTime;
+//    @Column(name = "feed_datetime")
+//    private LocalDateTime feedDateTime;
 
     @Builder
     public Post(Long todoId, String todoName, User user, Long userId , String content, String imageUrl,
@@ -64,6 +64,5 @@ public class Post {
         this.imageType = imageType;
         this.likeNumbers =  likeNumbers;
         this.commentNumbers = commentNumbers;
-        this.feedDateTime = feedDateTime;
     }
 }

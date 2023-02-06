@@ -10,26 +10,15 @@ import java.util.NoSuchElementException;
 @Data
 @NoArgsConstructor
 public class UserFollowDTO {
-    private UserRepository userRepository;
-
     private Long id;
 
     private String nickname;
 
-    private String password;
+    private String imageUrl;
 
-    public UserFollowDTO(UserRepository userRepository, Long id) {
-        System.out.println("UserFollowDTO 생성됨");
-        System.out.println(id);
-        this.userRepository = userRepository;
-        this.id = id;
+    public UserFollowDTO(User user) {
+        this.id = user.getId();
+        this.nickname = user.getNickname();
+        this.imageUrl = user.getImageUrl();
     }
-
-    public User toUserEntity() {
-        String message = String.format("%s에 해당하는 User 가 없습니다.", id);
-        System.out.println(id);
-        User user =  userRepository.findById(id).orElseThrow(()->new NoSuchElementException(message));
-        return user;
-    }
-
 }

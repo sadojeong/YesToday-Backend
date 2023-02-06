@@ -1,6 +1,7 @@
 package dev.yestoday.yestoday.web.controller;
 
 import dev.yestoday.yestoday.core.follow.dto.FollowerRequest;
+import dev.yestoday.yestoday.core.post.dto.PostResponse;
 import dev.yestoday.yestoday.core.user.application.UserService;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
@@ -21,7 +22,7 @@ public class UserRestController {
     }
 
     @GetMapping
-    public List<User> findAll() {
+    public List<UserDTO> findAll() {
         return userService.findAll();
     }
 
@@ -31,23 +32,26 @@ public class UserRestController {
 //    }
 
     @GetMapping("byid/{id}") // GET: members/1
-    public User findById(@PathVariable Long id) {
+    public UserDTO findById(@PathVariable Long id) {
         return userService.findById(id);
     }
 
     @GetMapping("bynickname/{nickname}") // users?username=jung
-    public User findByNickname(@PathVariable String nickname) {return userService.findByNickname(nickname);}
+    public UserDTO findByNickname(@PathVariable String nickname) {return userService.findByNickname(nickname);}
 
     @GetMapping("following-members/{id}")
     public List<FollowerRequest> getFollowingsById(@PathVariable Long id) {return userService.getFollowingsById(id);}
 
+    @GetMapping("postsinfo/{id}")
+    public List<PostResponse> getPostsById(@PathVariable Long id) {return userService.getPostsById(id);}
+
     @PostMapping
-    public List<User> save(@RequestBody UserDTO newUser) {
-        return userService.save(newUser);
+    public void save(@RequestBody UserDTO newUser) {
+        userService.save(newUser);
     }
 
     @DeleteMapping("byid/{id}")
-    public List<User> delete(@PathVariable("id")Long id){
-        return userService.delete(id);
+    public void delete(@PathVariable("id")Long id){
+        userService.delete(id);
     }
 }
