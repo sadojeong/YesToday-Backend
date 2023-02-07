@@ -1,6 +1,7 @@
 package dev.yestoday.yestoday.core.todo.application;
 
 import dev.yestoday.yestoday.core.todo.dto.TodoDTO;
+import dev.yestoday.yestoday.core.todo.dto.TodoUpdateRequest;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.todo.domain.Todo;
 import dev.yestoday.yestoday.core.todo.infrastrucuture.TodoRepository;
@@ -32,12 +33,12 @@ public class TodoService {
         return todoRepository.findAll();
     }
 
-    public List<Todo> update(Todo updateTodo) {
-        User user = userRepository.findById(updateTodo.getUserId()).get();
-        updateTodo.setUser(user);
-        todoRepository.save(updateTodo);
+    public void update(TodoUpdateRequest updateTodo) {
+        Todo saveTodo = todoRepository.findById(updateTodo.getId()).get();
+        saveTodo.setName(updateTodo.getName());
+        saveTodo.setTodoDescription(updateTodo.getTodoDescription());
 
-        return todoRepository.findAll();
+        todoRepository.save(saveTodo);
     }
 
     public List<Todo> delete(Long id) {

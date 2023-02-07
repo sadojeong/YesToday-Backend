@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class PostDTO {
+    private Long id;
     private Long todoId;
     private String todoName;
     private User user;
@@ -29,8 +30,9 @@ public class PostDTO {
     private LocalDateTime postDateTime;
 
     @Builder
-    public PostDTO(Long todoId, String todoName, User user, Long userId, String content,
+    public PostDTO(Long id, Long todoId, String todoName, User user, Long userId, String content,
                    String imageUrl, String imageType, Long likeNumbers, Long commentNumbers, LocalDateTime postDateTime){
+        this.id = id;
         this.todoId = todoId;
         this.todoName = todoName;
         this.user = user;
@@ -45,6 +47,7 @@ public class PostDTO {
 
     public Post toPostEntity(){
         return Post.builder()
+
                 .todoId(todoId)
                 .todoName(todoName)
                 .user(user)
