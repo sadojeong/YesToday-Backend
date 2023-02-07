@@ -4,6 +4,7 @@ import dev.yestoday.yestoday.core.todo.application.TodoService;
 import dev.yestoday.yestoday.core.todo.domain.Todo;
 
 import dev.yestoday.yestoday.core.todo.dto.TodoDTO;
+import dev.yestoday.yestoday.core.todo.dto.TodoUpdateRequest;
 import dev.yestoday.yestoday.core.todo.infrastrucuture.TodoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Slf4j //logging 남기는 어노테이션
 @RestController
-@RequestMapping(path = "/todos")
+@RequestMapping(path = "/api/todo")
 @CrossOrigin("*")
 public class TodoRestController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
@@ -46,10 +47,10 @@ public class TodoRestController {
 
     //Put - update()
     @PutMapping
-    public List<Todo> update(@RequestBody Todo updateTodo){
+    public void update(@RequestBody TodoUpdateRequest updateTodo){
         logger.info("--POST: localhost:8080/api/todo, update() called");
         logger.info("--@RequestBody User: {}", updateTodo);
-        return service.update(updateTodo);
+        service.update(updateTodo);
     }
 
     @PutMapping("/todocomplete")
