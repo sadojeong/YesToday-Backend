@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface TodoRepository extends JpaRepository<Todo, Long> {
     public List<Todo> findByUserIdAndTodoDate(Long userId, LocalDate todoDate);
+    public List<Todo> findByUserIdAndIsPosted(Long userId, boolean isPosted);
 }

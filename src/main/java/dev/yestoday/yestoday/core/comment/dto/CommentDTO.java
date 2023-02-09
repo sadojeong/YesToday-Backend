@@ -18,6 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 public class CommentDTO {
+    private Long id;
     private Long postId;
     private UserDTO user;
     private Long userId;
@@ -25,7 +26,8 @@ public class CommentDTO {
     private LocalDateTime commentDateTime;
 
     @Builder
-    public CommentDTO(Long postId, UserDTO user, Long userId, String commentDesc, LocalDateTime commentDateTime){
+    public CommentDTO(Long id,Long postId, UserDTO user, Long userId, String commentDesc, LocalDateTime commentDateTime){
+        this.id = id;
         this.postId = postId;
         this.user = user;
         this.userId = userId;
@@ -34,6 +36,7 @@ public class CommentDTO {
     }
 
     public CommentDTO(Comment comment) {
+        this.id = comment.getId();
         this.postId = comment.getPostId();
         this.user = new UserDTO(comment.getUser());
         this.userId = comment.getUserId();

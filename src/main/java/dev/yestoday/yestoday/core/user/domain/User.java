@@ -41,7 +41,7 @@ public class User {
     private List<Post> posts;
 
     @Builder
-    public User(String nickname, String password, String name, String email, String description, String phoneNumber,  String imageUrl, List<Follow> followings, List<Post> posts){
+    public User(String nickname, String password, String name, String email, String description, String phoneNumber,  String imageUrl, List<Follow> followings){
         this.nickname = nickname;
         this.password = password;
         this.name = name;
@@ -50,6 +50,6 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.imageUrl = imageUrl;
         this.followings = followings;
-        this.posts = posts;
+
     }
 }

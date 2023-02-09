@@ -17,15 +17,17 @@ public class TodoDTO {
     private boolean completeState;
     private String todoDescription;
     private LocalDate todoDate;
+    private boolean isPosted;
 
     @Builder
-    public TodoDTO(User user,Long userId, String name, boolean completeState, String todoDescription, LocalDate todoDate){
+    public TodoDTO(User user,Long userId, String name, boolean completeState, String todoDescription, LocalDate todoDate,boolean isPosted){
         this.user = user;
         this.userId = userId;
         this.name = name;
         this.completeState = completeState;
         this.todoDescription = todoDescription;
         this.todoDate = todoDate;
+        this.isPosted = isPosted;
     }
 
     public Todo toTodoEntity(){
@@ -36,6 +38,7 @@ public class TodoDTO {
                 .completeState(completeState)
                 .todoDescription(todoDescription)
                 .todoDate(todoDate)
+                .isPosted(isPosted)
                 .build();
     }
 }

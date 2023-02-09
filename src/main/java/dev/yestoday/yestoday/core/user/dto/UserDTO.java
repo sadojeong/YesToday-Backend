@@ -24,7 +24,7 @@ public class UserDTO {
 //    private List<Follow> followings;
 //    private List<Post> posts;
 
-    private UserRepository userRepository;
+
 
 
     @Builder

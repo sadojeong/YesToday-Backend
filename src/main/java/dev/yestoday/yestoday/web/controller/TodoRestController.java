@@ -75,6 +75,16 @@ public class TodoRestController {
         return service.findByUserIdAndTodoDate(userId, todoDate);
     }
 
+    @GetMapping(path="users/{userId}/not-posted-todos")
+    public List<Todo> findByUserIdAndIsPosted(@PathVariable("userId")Long userId){
+        return service.findByUserIdAndIsPosted(userId, false);
+    }
+
+    @PutMapping(path="id/{todoId}/post")
+    public void updatePost(@PathVariable("todoId") Long todoId, @RequestParam("isPosted")boolean isPosted){
+        service.updatePost(todoId,isPosted);
+    }
+
 
 
 }

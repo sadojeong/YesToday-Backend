@@ -38,6 +38,7 @@ public class TodoService {
         saveTodo.setName(updateTodo.getName());
         saveTodo.setTodoDescription(updateTodo.getTodoDescription());
 
+
         todoRepository.save(saveTodo);
     }
 
@@ -56,14 +57,26 @@ public class TodoService {
     }
 
     public List<Todo> findByUserIdAndTodoDate(Long userId, LocalDate todoDate){
-        String message = String.format("%s에 해당하는 오늘의 todo가 없습니다.", userId);
+    
 
         List<Todo> todos = todoRepository.findByUserIdAndTodoDate(userId, todoDate);
 
-        if(todos.isEmpty()){
-            new NoSuchElementException(message);
-        }
         return todos;
+    }
+
+    public List<Todo> findByUserIdAndIsPosted(Long userId, boolean isPosted){
+        String message = String.format("%s에 해당하는 작성가능한 todo가 없습니다.", userId);
+
+        List<Todo> todos = todoRepository.findByUserIdAndIsPosted(userId, isPosted);
+
+        return todos;
+    }
+
+    public void updatePost(Long todoId, boolean isPosted){
+        Todo updateTodo = todoRepository.findById(todoId).get();
+        updateTodo.setPosted(isPosted);
+
+        todoRepository.save(updateTodo);
 
     }
 
