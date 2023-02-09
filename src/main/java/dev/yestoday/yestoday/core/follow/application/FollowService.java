@@ -38,13 +38,23 @@ public class FollowService {
         return follower.size();
     }
 
-    public List<Follow> delete(Long id){
-        followRepository.deleteById(id);
-        return followRepository.findAll();
+    public void delete(Long userId, Long followUserId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        User followUser = userRepository.findById(followUserId).orElseThrow();
+        List<Follow> follows = followRepository.findAllByUserAndFollowUser(user, followUser).orElseThrow();
+
+        followRepository.deleteAll(follows);
     }
 
     public List<Follow> findByUserId(Long UserId){
         return followRepository.findByUserId(UserId);
+    }
+
+    public boolean checkFollow(Long userId, Long followUserId) {
+        User user = userRepository.findById(userId).orElseThrow();
+        User followUser = userRepository.findById(followUserId).orElseThrow();
+        List<Follow> follows = followRepository.findAllByUserAndFollowUser(user, followUser).orElseThrow();
+        return !follows.isEmpty();
     }
 
 }
