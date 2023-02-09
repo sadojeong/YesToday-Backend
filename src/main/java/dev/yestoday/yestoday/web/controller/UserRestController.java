@@ -43,6 +43,9 @@ public class UserRestController {
     @GetMapping("following-members/{id}")
     public List<UserFollowDTO> getFollowingsById(@PathVariable Long id) {return userService.getFollowingsById(id);}
 
+    @GetMapping("following-posts/{id}")
+    public List<FollowerRequest> getFollowingPostById(@PathVariable Long id) {return userService.getFollowingPostById(id);}
+
     @GetMapping("follower-members/{id}")
     public List<UserFollowDTO> getFollowersById(@PathVariable Long id) {return userService.getFollowersById(id);}
 
