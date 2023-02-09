@@ -74,6 +74,19 @@ public class UserService {
         return user.getFollowings().size();
     }
 
+    public List<FollowerRequest> getFollowingPostById(Long id){
+        List<FollowerRequest> returnFollowings = new ArrayList<>();
+
+        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
+        List<Follow> followings = user.getFollowings();
+
+        for (Follow following:followings){
+            returnFollowings.add(new FollowerRequest(following));
+        }
+
+        return returnFollowings;
+    }
+
     public List<UserFollowDTO> getFollowingsById(Long id) {
         List<UserFollowDTO> returnFollowings = new ArrayList<>();
 
