@@ -43,7 +43,7 @@ public class LikeRestController {
     }
 
     @GetMapping(path="users/{userId}/posts/{postId}")
-    public boolean findByUserIdAndPostId(@PathVariable("userId")Long userId, @PathVariable("postId")Long postId){
+    public Likes findByUserIdAndPostId(@PathVariable("userId")Long userId, @PathVariable("postId")Long postId){
         return service.findByUserIdAndPostId(userId, postId);
     }
 }

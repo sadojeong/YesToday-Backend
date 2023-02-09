@@ -2,6 +2,7 @@ package dev.yestoday.yestoday.core.post.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import dev.yestoday.yestoday.core.user.domain.User;
+import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;

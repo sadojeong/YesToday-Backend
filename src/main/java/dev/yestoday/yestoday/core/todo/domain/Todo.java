@@ -49,13 +49,17 @@ public class Todo {
     @Column(name="todo_date",nullable = false)
     private LocalDate todoDate;
 
+    @Column(name="is_posted")
+    private boolean isPosted;
+
     @Builder
-    public Todo(User user, Long userId, String name, boolean completeState, String todoDescription ,LocalDate todoDate) {
+    public Todo(User user, Long userId, String name, boolean completeState, String todoDescription ,LocalDate todoDate, boolean isPosted) {
         this.user = user;
         this.userId = userId;
         this.name = name;
         this.completeState = completeState;
         this.todoDescription = todoDescription;
         this.todoDate = todoDate;
+        this.isPosted = isPosted;
     }
 }

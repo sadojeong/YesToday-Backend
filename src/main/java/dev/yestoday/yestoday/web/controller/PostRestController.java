@@ -7,6 +7,7 @@ import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.post.application.PostService;
 import dev.yestoday.yestoday.core.post.domain.Post;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
+import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +18,15 @@ import java.util.List;
 @RequestMapping(path = "/posts")
 @CrossOrigin("*")
 public class PostRestController {
+    private final UserRepository userRepository;
     private final PostService postService;
     private final UserService userService;
 
-    public PostRestController(PostService postService, UserService userService) {
+    public PostRestController(PostService postService, UserService userService,
+                              UserRepository userRepository) {
         this.postService = postService;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -31,8 +35,8 @@ public class PostRestController {
 
     @PostMapping
     public void save(@RequestBody Post newPost) {
-        System.out.println(newPost.getUserId());
-        System.out.println(newPost.getUser());
+        User user = userRepository.findById(newPost.getUserId()).get();
+        newPost.setUser(user);
         postService.save(newPost);
     }
 

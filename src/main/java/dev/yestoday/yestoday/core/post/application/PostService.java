@@ -4,6 +4,7 @@ import dev.yestoday.yestoday.core.post.domain.Post;
 import dev.yestoday.yestoday.core.post.dto.PostDTO;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.post.infrastructure.PostRepository;
+import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

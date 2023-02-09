@@ -49,10 +49,8 @@ public class LikesService {
         return likesRepository.findByUserId(userId);
     }
 
-    public boolean findByUserIdAndPostId(Long userId, Long PostId){
-        if (likesRepository.findByUserIdAndPostId(userId, PostId).isEmpty()){
-            return false;
-        }
-        return true;
+    public Likes findByUserIdAndPostId(Long userId, Long PostId){
+
+        return likesRepository.findByUserIdAndPostId(userId, PostId);
     }
 }
