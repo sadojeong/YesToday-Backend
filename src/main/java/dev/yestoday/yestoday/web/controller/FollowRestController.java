@@ -29,17 +29,20 @@ public class FollowRestController {
         return followService.numberOfFollower(id);
     }
 
+    @GetMapping("following-check/{userId}/{followUserId}")
+    public boolean checkFollow(@PathVariable Long userId, @PathVariable Long followUserId) {
+        return followService.checkFollow(userId, followUserId);
+    }
+
     @PostMapping
     public void save(@RequestBody Follow newFollow) {
         followService.save(newFollow);
     }
 
-    @DeleteMapping(path = "/{followId}")
-    public List<Follow> delete(@PathVariable("followId") Long followId){
-        log.debug("--POST: localhost:8080/api/feeds, delete() called");
-        log.debug("--@RequestParam feedID: {}",followId);
-        return followService.delete(followId);
-
+    @DeleteMapping("{userId}/{followUserId}")
+    public void delete(@PathVariable Long userId, @PathVariable Long followUserId){
+        log.debug("--delete: localhost:8080/api/feeds, delete() called");
+        followService.delete(userId, followUserId);
     }
 
     @GetMapping(path = "users/{userId}")

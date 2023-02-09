@@ -2,10 +2,12 @@ package dev.yestoday.yestoday.core.user.application;
 
 import dev.yestoday.yestoday.core.follow.domain.Follow;
 import dev.yestoday.yestoday.core.follow.dto.FollowerRequest;
+import dev.yestoday.yestoday.core.follow.infrastructure.FollowRepository;
 import dev.yestoday.yestoday.core.post.domain.Post;
 import dev.yestoday.yestoday.core.post.dto.PostResponse;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
+import dev.yestoday.yestoday.core.user.dto.UserFollowDTO;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,8 +22,12 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private FollowRepository followRepository;
 
-    public UserService(UserRepository userRepository) { this.userRepository = userRepository; }
+    public UserService(UserRepository userRepository, FollowRepository followRepository) {
+        this.userRepository = userRepository;
+        this.followRepository = followRepository;}
 
     public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
@@ -68,16 +74,36 @@ public class UserService {
         return user.getFollowings().size();
     }
 
-    public List<FollowerRequest> getFollowingsById(Long id) {
-        List<FollowerRequest> returnFollowings = new ArrayList<>();
+    public List<UserFollowDTO> getFollowingsById(Long id) {
+        List<UserFollowDTO> returnFollowings = new ArrayList<>();
+
         User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
         List<Follow> followings = user.getFollowings();
 
         for (Follow following: followings
         ) {
-            returnFollowings.add(new FollowerRequest(following));
+            returnFollowings.add(new UserFollowDTO(following.getFollowUser()));
         }
         return returnFollowings;
+    }
+
+    public List<UserFollowDTO> getFollowersById(Long id) {
+        List<UserFollowDTO> returnFollowers = new ArrayList<>();
+
+        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
+
+        System.out.println(user);
+
+        List<Follow> followers = followRepository.findAllByFollowUser(user).orElseThrow(()->new NoSuchElementException("followers 정보를 받아올 수 없습니다."));
+
+        System.out.println(followers + " hhh");
+        System.out.println(followers.size());
+
+        for (Follow follower: followers
+        ) {
+            returnFollowers.add(new UserFollowDTO(follower.getUser()));
+        }
+        return returnFollowers;
     }
 
 
