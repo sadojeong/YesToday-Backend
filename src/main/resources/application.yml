@@ -6,25 +6,25 @@ logging:
     dev.bank: DEBUG
 
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yestoday?serverTimezone=Asia/Seoul
-    username: root
-    password: Abc1234!
-  jpa:
-    database: mysql
-    show-sql: true
-    generate-ddl: true
-
-
-  # DB ??
 #  datasource:
-#    url: jdbc:h2:tcp://localhost/~/test
-#    driver-class-name: org.h2.Driver
-#    username: sa
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/yestoday?serverTimezone=Asia/Seoul
+#    username: root
+#    password: Abc1234!
 #  jpa:
+#    database: mysql
 #    show-sql: true
-#    hibernate.hbm2ddl.auto: update
+#    generate-ddl: true
+
+
+#  DB ??
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    driver-class-name: org.h2.Driver
+    username: sa
+  jpa:
+    show-sql: true
+    hibernate.hbm2ddl.auto: update
 #    hibernate:
 #        ddl-auto: create
 

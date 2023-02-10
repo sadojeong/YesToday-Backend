@@ -50,6 +50,18 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    public void update(UserDTO updateUser) {
+        User user = userRepository.findById(updateUser.getId()).get();
+        user.setName(updateUser.getName());
+        user.setEmail(updateUser.getEmail());
+        user.setDescription(updateUser.getDescription());
+        user.setImageUrl(updateUser.getImageUrl());
+        user.setNickname(updateUser.getNickname());
+        user.setPassword(updateUser.getPassword());
+
+        userRepository.save(user);
+    }
+
     public User dtoToUser(UserDTO userDTO) {
         return userRepository.findById(userDTO.getId()).orElseThrow(()->new NoSuchElementException());
     }

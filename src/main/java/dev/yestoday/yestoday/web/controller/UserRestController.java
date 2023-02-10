@@ -57,6 +57,9 @@ public class UserRestController {
         userService.save(newUser);
     }
 
+    @PutMapping
+    public void update(@RequestBody UserDTO updateUser) {userService.update(updateUser);}
+
     @DeleteMapping("byid/{id}")
     public void delete(@PathVariable("id")Long id){
         userService.delete(id);
