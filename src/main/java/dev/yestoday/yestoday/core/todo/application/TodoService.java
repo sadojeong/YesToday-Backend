@@ -9,6 +9,7 @@ import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -64,12 +65,17 @@ public class TodoService {
         return todos;
     }
 
-    public List<Todo> findByUserIdAndIsPosted(Long userId, boolean isPosted){
-        String message = String.format("%s에 해당하는 작성가능한 todo가 없습니다.", userId);
+    public List<Todo> findByUserIdAndIsPosted(Long userId, LocalDate todoDate){
+        List<Todo> todos = findByUserIdAndTodoDate(userId, todoDate);
+        List<Todo> notPostedTodos = new ArrayList<>();
 
-        List<Todo> todos = todoRepository.findByUserIdAndIsPosted(userId, isPosted);
+        for (Todo todo:todos){
+            if(!todo.isPosted()){
+                notPostedTodos.add(todo);
+            }
+        }
 
-        return todos;
+        return notPostedTodos;
     }
 
     public void updatePost(Long todoId, boolean isPosted){
