@@ -75,9 +75,9 @@ public class TodoRestController {
         return service.findByUserIdAndTodoDate(userId, todoDate);
     }
 
-    @GetMapping(path="users/{userId}/not-posted-todos")
-    public List<Todo> findByUserIdAndIsPosted(@PathVariable("userId")Long userId){
-        return service.findByUserIdAndIsPosted(userId, false);
+    @GetMapping(path="users/{userId}/not-posted-todos/todo-date/{todoDate}")
+    public List<Todo> findByUserIdAndIsPosted(@PathVariable("userId")Long userId, @PathVariable("todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate todoDate){
+        return service.findByUserIdAndIsPosted(userId, todoDate);
     }
 
     @PutMapping(path="id/{todoId}/post")
