@@ -31,7 +31,7 @@ public class TodoService {
         newTodo.setUser(user);
         todoRepository.save(newTodo);
 
-        return todoRepository.findAll();
+        return  todoRepository.findByUserIdAndTodoDate(newTodo.getUserId(), newTodo.getTodoDate());
     }
 
     public void update(TodoUpdateRequest updateTodo) {
@@ -44,10 +44,10 @@ public class TodoService {
     }
 
     public List<Todo> delete(Long id) {
-
+        Todo todo = todoRepository.findById((id)).get();
         todoRepository.deleteById(id);
 
-        return todoRepository.findAll();
+        return  todoRepository.findByUserIdAndTodoDate(todo.getUserId(), todo.getTodoDate());
     }
 
     public Todo findById(Long id) {
