@@ -14,16 +14,16 @@ public class Member {
     @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private  String nickname;
     private String email;
-
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
     @Builder
-    public Member(String email, String password, Authority authority) {
+    public Member(String nickname, String email, String password, Authority authority) {
+        this.nickname = nickname;
         this.email = email;
         this.password = password;
         this.authority = authority;
