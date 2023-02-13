@@ -11,12 +11,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @NoArgsConstructor
 public class MemberRequestDto {
 
+    private String nickname;
     private String email;
     private String password;
 
     public Member toMember(PasswordEncoder passwordEncoder) {
-        System.out.println("여기2");
         return Member.builder()
+                .nickname(nickname)
                 .email(email)
                 .password(passwordEncoder.encode(password))
                 .authority(Authority.ROLE_USER)
