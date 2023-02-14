@@ -12,6 +12,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @RequiredArgsConstructor
@@ -32,32 +35,32 @@ public class SecurityConfig {
                 .antMatchers("/h2-console/**", "/favicon.ico","/localhost:3000/**");
     }
 
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//
-//        //허용할 url 설정
-//        configuration.addAllowedOrigin("http://localhost:3000");
-//        // http://localhost:3000
-//
-//        //허용할 헤더 설정
-//        configuration.addAllowedHeader("*");
-//        //허용할 http method
-//        configuration.addAllowedMethod("*");
-//
-//        //사용자 자격 증명이 지원되는지 여부
-//        configuration.setAllowCredentials(true);
-//
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//
-//    }
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        //허용할 url 설정
+        configuration.addAllowedOrigin("http://localhost:3000");
+        // http://localhost:3000
+
+        //허용할 헤더 설정
+        configuration.addAllowedHeader("*");
+        //허용할 http method
+        configuration.addAllowedMethod("*");
+
+        //사용자 자격 증명이 지원되는지 여부
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             // CSRF 설정 Disable
         http.csrf().disable()
+                .cors().and()
 
             // exception handling 할 때 우리가 만든 클래스를 추가
             .exceptionHandling()
@@ -83,8 +86,9 @@ public class SecurityConfig {
             .antMatchers(
                     "http://localhost8080/auth/**"
                     ,"http://localhost3000/Signup"
-                    ,"http://localhost3000/Signin",
-                    "/auth/**"
+                    ,"http://localhost3000/Signin"
+                    ,"/auth/**"
+                    ,"/users/byemail/**"
                     ).permitAll()
             .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
 

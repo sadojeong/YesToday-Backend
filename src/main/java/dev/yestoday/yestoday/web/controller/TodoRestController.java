@@ -18,7 +18,7 @@ import java.util.List;
 @Slf4j //logging 남기는 어노테이션
 @RestController
 @RequestMapping(path = "/api/todo")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TodoRestController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final TodoService service;
