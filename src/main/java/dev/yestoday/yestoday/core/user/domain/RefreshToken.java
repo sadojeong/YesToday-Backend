@@ -1,4 +1,4 @@
-package dev.yestoday.yestoday.core.member.entity;
+package dev.yestoday.yestoday.core.user.domain;
 
 import lombok.Builder;
 import lombok.Getter;

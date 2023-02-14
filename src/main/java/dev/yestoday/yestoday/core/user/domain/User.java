@@ -21,11 +21,11 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "user_email")
+    @Column(name = "user_email", nullable = false)
     private String email;
     @Column(name = "user_password", nullable = false)
     private String password;
-    @Column(name = "user_name", nullable = false, length = 20)
+    @Column(name = "user_name", length = 20)
     private String name;
     @Column(name = "user_phone_number")
     private String phoneNumber;
@@ -41,8 +41,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Post> posts;
 
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
     @Builder
-    public User(String nickname, String password, String name, String email, String description, String phoneNumber,  String imageUrl, List<Follow> followings){
+    public User(String nickname, String password, String name, String email, String description, String phoneNumber,  String imageUrl, List<Follow> followings, Authority authority){
         this.nickname = nickname;
         this.password = password;
         this.name = name;
@@ -51,6 +54,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.imageUrl = imageUrl;
         this.followings = followings;
+        this.authority = authority;
 
     }
 }

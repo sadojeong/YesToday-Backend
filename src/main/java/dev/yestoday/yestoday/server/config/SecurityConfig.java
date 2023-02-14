@@ -1,8 +1,8 @@
 package dev.yestoday.yestoday.server.config;
 
-import dev.yestoday.yestoday.core.member.jwt.JwtAccessDeniedHandler;
-import dev.yestoday.yestoday.core.member.jwt.TokenProvider;
-import dev.yestoday.yestoday.core.member.jwt.JwtAuthenticationEntryPoint;
+import dev.yestoday.yestoday.core.user.jwt.JwtAccessDeniedHandler;
+import dev.yestoday.yestoday.core.user.jwt.TokenProvider;
+import dev.yestoday.yestoday.core.user.jwt.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,9 +12,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @RequiredArgsConstructor

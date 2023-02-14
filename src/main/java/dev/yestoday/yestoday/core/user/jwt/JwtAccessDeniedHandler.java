@@ -1,4 +1,4 @@
-package dev.yestoday.yestoday.core.member.jwt;
+package dev.yestoday.yestoday.core.user.jwt;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

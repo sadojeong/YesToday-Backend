@@ -8,16 +8,20 @@ import dev.yestoday.yestoday.core.post.dto.PostResponse;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.dto.UserFollowDTO;
+import dev.yestoday.yestoday.core.user.dto.UserResponseDto;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 
 @Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class UserService {
 
     @Autowired
@@ -75,8 +79,12 @@ public class UserService {
 
     public UserDTO findByNickname(String nickname) {
         String message = String.format("%s에 해당하는 User 가 없습니다.", nickname);
-        System.out.println(nickname);
         User user = userRepository.findByNickname(nickname).orElseThrow(()->new NoSuchElementException(message));
+        return new UserDTO(user);
+    }
+
+    public UserDTO findByEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(()->new NoSuchElementException());
         return new UserDTO(user);
     }
 
@@ -153,7 +161,19 @@ public class UserService {
             returnPosts.add(new PostResponse(post));
         }
         return returnPosts;
-
     }
+
+    public UserResponseDto findMemberInfoById(Long memberId) {
+        return userRepository.findById(memberId)
+                .map(UserResponseDto::of)
+                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
+    }
+
+    public UserResponseDto findMemberInfoByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(UserResponseDto::of)
+                .orElseThrow(() -> new RuntimeException("유저 정보가 없습니다."));
+    }
+
 
 }

@@ -1,7 +1,7 @@
-package dev.yestoday.yestoday.core.member.dto;
+package dev.yestoday.yestoday.core.user.dto;
 
-import dev.yestoday.yestoday.core.member.entity.Authority;
-import dev.yestoday.yestoday.core.member.entity.Member;
+import dev.yestoday.yestoday.core.user.domain.Authority;
+import dev.yestoday.yestoday.core.user.domain.User;
 import lombok.*;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,14 +9,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberRequestDto {
+public class UserRequestDto {
 
     private String nickname;
     private String email;
     private String password;
 
-    public Member toMember(PasswordEncoder passwordEncoder) {
-        return Member.builder()
+    public User toUser(PasswordEncoder passwordEncoder) {
+        return User.builder()
                 .nickname(nickname)
                 .email(email)
                 .password(passwordEncoder.encode(password))

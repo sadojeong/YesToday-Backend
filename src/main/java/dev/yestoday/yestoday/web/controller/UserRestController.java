@@ -6,7 +6,10 @@ import dev.yestoday.yestoday.core.user.application.UserService;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.dto.UserFollowDTO;
+import dev.yestoday.yestoday.core.user.dto.UserResponseDto;
+import dev.yestoday.yestoday.core.user.util.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +43,9 @@ public class UserRestController {
     @GetMapping("bynickname/{nickname}") // users?username=jung
     public UserDTO findByNickname(@PathVariable String nickname) {return userService.findByNickname(nickname);}
 
+    @GetMapping("byemail/{email}")
+    public UserDTO findByEmail(@PathVariable String email) {return userService.findByEmail(email);}
+
     @GetMapping("following-members/{id}")
     public List<UserFollowDTO> getFollowingsById(@PathVariable Long id) {return userService.getFollowingsById(id);}
 
@@ -51,6 +57,16 @@ public class UserRestController {
 
     @GetMapping("postsinfo/{id}")
     public List<PostResponse> getPostsById(@PathVariable Long id) {return userService.getPostsById(id);}
+
+    @GetMapping("/me")
+    public ResponseEntity<UserResponseDto> findMemberInfoById() {
+        return ResponseEntity.ok(userService.findMemberInfoById(SecurityUtil.getCurrentMemberId()));
+    }
+
+    @GetMapping("login/byemail/{email}")
+    public ResponseEntity<UserResponseDto> findMemberInfoByEmail(@PathVariable String email) {
+        return ResponseEntity.ok(userService.findMemberInfoByEmail(email));
+    }
 
     @PostMapping
     public void save(@RequestBody UserDTO newUser) {

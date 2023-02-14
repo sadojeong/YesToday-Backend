@@ -1,4 +1,4 @@
-package dev.yestoday.yestoday.core.member.dto;
+package dev.yestoday.yestoday.core.user.dto;
 
 import lombok.*;
 
