@@ -78,12 +78,12 @@ public class TodoService {
         return notPostedTodos;
     }
 
-    public void updatePost(Long todoId, boolean isPosted){
+    public Todo updatePost(Long todoId, boolean isPosted){
         Todo updateTodo = todoRepository.findById(todoId).get();
         updateTodo.setPosted(isPosted);
 
         todoRepository.save(updateTodo);
-
+        return updateTodo;
     }
 
 

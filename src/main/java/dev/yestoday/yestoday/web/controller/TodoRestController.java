@@ -81,8 +81,13 @@ public class TodoRestController {
     }
 
     @PutMapping(path="id/{todoId}/post")
-    public void updatePost(@PathVariable("todoId") Long todoId, @RequestParam("isPosted")boolean isPosted){
-        service.updatePost(todoId,isPosted);
+    public Todo updatePost(@PathVariable("todoId") Long todoId, @RequestParam("isPosted")boolean isPosted){
+        return service.updatePost(todoId,isPosted);
+    }
+
+    @GetMapping(path="/id/{todoId}")
+    public Todo findById(@PathVariable("todoId")Long todoId){
+        return service.findById(todoId);
     }
 
 

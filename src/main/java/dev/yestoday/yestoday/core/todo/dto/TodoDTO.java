@@ -1,5 +1,6 @@
 package dev.yestoday.yestoday.core.todo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.todo.domain.Todo;
 import lombok.Builder;
@@ -16,6 +17,7 @@ public class TodoDTO {
     private String name;
     private boolean completeState;
     private String todoDescription;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate todoDate;
     private boolean isPosted;
 

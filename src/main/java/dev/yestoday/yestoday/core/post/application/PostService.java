@@ -2,12 +2,16 @@ package dev.yestoday.yestoday.core.post.application;
 
 import dev.yestoday.yestoday.core.post.domain.Post;
 import dev.yestoday.yestoday.core.post.dto.PostDTO;
+import dev.yestoday.yestoday.core.post.dto.PostResponse;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.post.infrastructure.PostRepository;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,5 +51,15 @@ public class PostService {
         updatePost.setImageType(newPost.getImageType());
         postRepository.save(updatePost);
 
+    }
+
+    public PostResponse findByTodoId(Long todoId){
+        return new PostResponse(postRepository.findByTodoId(todoId));
+    }
+
+    public Page<PostResponse> getFeed(Long userId, int size, int page){
+        final Pageable pageable = PageRequest.of(page, size);
+        final Page<PostResponse> posts = postRepository.findPostResponsePageOfFollowingMembers(userId, pageable);
+        return posts;
     }
 }

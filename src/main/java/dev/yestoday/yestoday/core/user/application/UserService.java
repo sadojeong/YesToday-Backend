@@ -10,11 +10,13 @@ import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.dto.UserFollowDTO;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -86,18 +88,6 @@ public class UserService {
         return user.getFollowings().size();
     }
 
-    public List<FollowerRequest> getFollowingPostById(Long id){
-        List<FollowerRequest> returnFollowings = new ArrayList<>();
-
-        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
-        List<Follow> followings = user.getFollowings();
-
-        for (Follow following:followings){
-            returnFollowings.add(new FollowerRequest(following));
-        }
-
-        return returnFollowings;
-    }
 
     public List<UserFollowDTO> getFollowingsById(Long id) {
         List<UserFollowDTO> returnFollowings = new ArrayList<>();
@@ -154,6 +144,38 @@ public class UserService {
         }
         return returnPosts;
 
+    }
+
+    @Transactional
+    public List<PostResponse> getFollowingPostById(Long id, Pageable pageable){
+        List<PostResponse> feed = new ArrayList<>();
+
+        //follow한 사람들 list
+        List<FollowerRequest> returnFollowings = new ArrayList<>();
+        User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
+        List<Follow> followings = user.getFollowings();
+
+        for (Follow following:followings){
+            returnFollowings.add(new FollowerRequest(following));
+        }
+
+        //내 포스트들
+        List<PostResponse> myPosts =  getPostsById(id);
+
+        feed.addAll(myPosts);
+
+        for(FollowerRequest follow:returnFollowings){
+            System.out.println(follow.getFollowUser().getPosts());
+            feed.addAll(follow.getFollowUser().getPosts());
+        }
+        //followPostsList.sort((a, b) => new Date(a.postDateTime) - new Date(b.postDateTime)).reverse();
+        List<PostResponse> returnFeed = feed
+                .stream()
+                .sorted(Comparator.comparing(PostResponse::getPostDateTime).reversed())
+                .collect(Collectors.toList());
+
+        System.out.println("ddd");
+        return returnFeed;
     }
 
 }

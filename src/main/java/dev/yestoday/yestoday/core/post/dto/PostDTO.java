@@ -1,6 +1,7 @@
 package dev.yestoday.yestoday.core.post.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.yestoday.yestoday.core.post.domain.Post;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
@@ -28,6 +29,7 @@ public class PostDTO {
     private String imageType;
     private Long likeNumbers;
     private Long commentNumbers;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime postDateTime;
 
     @Builder

@@ -7,6 +7,8 @@ import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.dto.UserFollowDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +46,7 @@ public class UserRestController {
     public List<UserFollowDTO> getFollowingsById(@PathVariable Long id) {return userService.getFollowingsById(id);}
 
     @GetMapping("following-posts/{id}")
-    public List<FollowerRequest> getFollowingPostById(@PathVariable Long id) {return userService.getFollowingPostById(id);}
+    public List<PostResponse> getFollowingPostById(@PathVariable Long id, @PageableDefault(size = 3)Pageable pageable) {return userService.getFollowingPostById(id, pageable);}
 
     @GetMapping("follower-members/{id}")
     public List<UserFollowDTO> getFollowersById(@PathVariable Long id) {return userService.getFollowersById(id);}

@@ -1,6 +1,7 @@
 package dev.yestoday.yestoday.core.post.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import lombok.*;
