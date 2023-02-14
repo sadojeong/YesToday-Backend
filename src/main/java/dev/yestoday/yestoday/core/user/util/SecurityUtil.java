@@ -1,4 +1,4 @@
-package dev.yestoday.yestoday.core.member.util;
+package dev.yestoday.yestoday.core.user.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

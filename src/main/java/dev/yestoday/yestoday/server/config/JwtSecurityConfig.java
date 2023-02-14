@@ -1,7 +1,7 @@
 package dev.yestoday.yestoday.server.config;
 
-import dev.yestoday.yestoday.core.member.jwt.JwtFilter;
-import dev.yestoday.yestoday.core.member.jwt.TokenProvider;
+import dev.yestoday.yestoday.core.user.jwt.JwtFilter;
+import dev.yestoday.yestoday.core.user.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

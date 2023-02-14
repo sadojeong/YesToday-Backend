@@ -1,4 +1,4 @@
-package dev.yestoday.yestoday.core.member.jwt;
+package dev.yestoday.yestoday.core.user.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;

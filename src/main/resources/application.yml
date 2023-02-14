@@ -1,25 +1,28 @@
-
 logging:
   pattern:
     console: "[%d{HH:mm:ss.SSS}][%-5level][%logger.%method:line%line] - %msg%n"
   level:
     dev.bank: DEBUG
 
+cloud:
+  aws:
+    stack:
+      auto: false
+    credentials:
+      instanceProfile: true
+
 spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://yestoday-database.cvtvdp97ytex.ap-northeast-1.rds.amazonaws.com:3306/yestodayDB?serverTimezone=Asia/Seoul
-#    username: admin
-#    password: abcd1234
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/yestoday?serverTimezone=Asia/Seoul
-    username: root
-    password: Abc1234!
-  jpa:
-    database: mysql
-    show-sql: true
-    generate-ddl: true
+
+  #  datasource:
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #    url: jdbc:mysql://localhost:3306/yestoday?serverTimezone=Asia/Seoul
+  #    username: root
+  #    password: Abc1234!
+  #  jpa:
+  #    database: mysql
+  #    show-sql: true
+  #    generate-ddl: true
+
 
 #  datasource:
 #    url: jdbc:h2:tcp://localhost/~/test
@@ -28,8 +31,33 @@ spring:
 #  jpa:
 #    show-sql: true
 #    hibernate.hbm2ddl.auto: update
-##    hibernate:
-##        ddl-auto: create
+  #    hibernate:
+  #        ddl-auto: create
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://yestoday-database.cvtvdp97ytex.ap-northeast-1.rds.amazonaws.com:3306/yestodayDB?serverTimezone=Asia/Seoul
+    username: admin
+    password: abcd1234
+    validationQuery: "SELECT 1"
+  jpa:
+    database: mysql
+    show-sql: true
+    generate-ddl: true
+
+
+
+
+#  datasource:
+#    url: jdbc:h2:tcp://localhost/~/test
+#    driver-class-name: org.h2.Driver
+#    username: sa
+#  jpa:
+#    show-sql: true
+##    hibernate.hbm2ddl.auto: update
+#    hibernate:
+#          ddl-auto: create
 
 
   mvc:
@@ -41,6 +69,3 @@ spring:
 
 jwt:
   secret: c3ByaW5nLWJvb3Qtc2VjdXJpdHktand0LXR1dG9yaWFsLWppd29vbi1zcHJpbmctYm9vdC1zZWN1cml0eS1qd3QtdHV0b3JpYWwK
-
-
-

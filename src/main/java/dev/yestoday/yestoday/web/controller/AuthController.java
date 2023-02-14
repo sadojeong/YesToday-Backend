@@ -1,32 +1,30 @@
 package dev.yestoday.yestoday.web.controller;
 
 
-import dev.yestoday.yestoday.core.member.dto.MemberRequestDto;
-import dev.yestoday.yestoday.core.member.dto.MemberResponseDto;
-import dev.yestoday.yestoday.core.member.dto.TokenRequestDto;
-import dev.yestoday.yestoday.core.member.dto.TokenDto;
-import dev.yestoday.yestoday.core.member.service.AuthService;
+import dev.yestoday.yestoday.core.user.dto.UserRequestDto;
+import dev.yestoday.yestoday.core.user.dto.UserResponseDto;
+import dev.yestoday.yestoday.core.user.dto.TokenRequestDto;
+import dev.yestoday.yestoday.core.user.dto.TokenDto;
+import dev.yestoday.yestoday.core.user.application.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto memberRequestDto) {
-        return ResponseEntity.ok(authService.signup(memberRequestDto));
+    public ResponseEntity<UserResponseDto> signup(@RequestBody UserRequestDto userRequestDto) {
+        return ResponseEntity.ok(authService.signup(userRequestDto));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDto> login(@RequestBody MemberRequestDto memberRequestDto) {
-        return ResponseEntity.ok(authService.login(memberRequestDto));
+    public ResponseEntity<TokenDto> login(@RequestBody UserRequestDto userRequestDto) {
+        return ResponseEntity.ok(authService.login(userRequestDto));
     }
 
     @PostMapping("/reissue")

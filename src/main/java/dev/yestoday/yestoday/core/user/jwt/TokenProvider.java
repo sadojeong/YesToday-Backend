@@ -1,6 +1,6 @@
-package dev.yestoday.yestoday.core.member.jwt;
+package dev.yestoday.yestoday.core.user.jwt;
 
-import dev.yestoday.yestoday.core.member.dto.TokenDto;
+import dev.yestoday.yestoday.core.user.dto.TokenDto;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

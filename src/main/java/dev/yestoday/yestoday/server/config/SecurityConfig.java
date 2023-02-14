@@ -1,8 +1,8 @@
 package dev.yestoday.yestoday.server.config;
 
-import dev.yestoday.yestoday.core.member.jwt.JwtAccessDeniedHandler;
-import dev.yestoday.yestoday.core.member.jwt.TokenProvider;
-import dev.yestoday.yestoday.core.member.jwt.JwtAuthenticationEntryPoint;
+import dev.yestoday.yestoday.core.user.jwt.JwtAccessDeniedHandler;
+import dev.yestoday.yestoday.core.user.jwt.TokenProvider;
+import dev.yestoday.yestoday.core.user.jwt.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +32,28 @@ public class SecurityConfig {
                 .antMatchers("/h2-console/**", "/favicon.ico","/localhost:3000/**");
     }
 
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//
+//        //허용할 url 설정
+//        configuration.addAllowedOrigin("http://localhost:3000");
+//        // http://localhost:3000
+//
+//        //허용할 헤더 설정
+//        configuration.addAllowedHeader("*");
+//        //허용할 http method
+//        configuration.addAllowedMethod("*");
+//
+//        //사용자 자격 증명이 지원되는지 여부
+//        configuration.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        return source;
+//
+//    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
             // CSRF 설정 Disable
@@ -58,7 +80,12 @@ public class SecurityConfig {
             .and()
             .authorizeRequests()
                 .antMatchers("/", "/**").permitAll()
-//            .antMatchers("/auth/**").permitAll()
+//            .antMatchers(
+//                    "http://localhost8080/auth/**"
+//                    ,"http://localhost3000/Signup"
+//                    ,"http://localhost3000/Signin",
+//                    "/auth/**"
+//                    ).permitAll()
             .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
 
             // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
