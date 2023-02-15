@@ -10,13 +10,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequestDto {
-
+    private String imageUrl = "https://yestoday.s3.ap-northeast-2.amazonaws.com/user.png";
     private String nickname;
     private String email;
     private String password;
 
     public User toUser(PasswordEncoder passwordEncoder) {
         return User.builder()
+                .imageUrl(imageUrl)
                 .nickname(nickname)
                 .email(email)
                 .password(passwordEncoder.encode(password))

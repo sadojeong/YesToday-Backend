@@ -1,5 +1,6 @@
 package dev.yestoday.yestoday.core.comment.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.yestoday.yestoday.core.comment.domain.Comment;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
@@ -23,6 +24,7 @@ public class CommentDTO {
     private UserDTO user;
     private Long userId;
     private String commentDesc;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime commentDateTime;
 
     @Builder

@@ -12,6 +12,7 @@ cloud:
       instanceProfile: true
 
 spring:
+
   #  datasource:
   #    driver-class-name: com.mysql.cj.jdbc.Driver
   #    url: jdbc:mysql://localhost:3306/yestoday?serverTimezone=Asia/Seoul
@@ -29,9 +30,10 @@ spring:
 #    username: sa
 #  jpa:
 #    show-sql: true
-#    hibernate.hbm2ddl.auto: update
-  #    hibernate:
-  #        ddl-auto: create
+##    hibernate.hbm2ddl.auto: update
+#    hibernate:
+#        ddl-auto: create
+
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -43,6 +45,7 @@ spring:
     database: mysql
     show-sql: true
     generate-ddl: true
+
 
 
 

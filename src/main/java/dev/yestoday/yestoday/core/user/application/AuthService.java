@@ -1,5 +1,7 @@
 package dev.yestoday.yestoday.core.user.application;
 
+import dev.yestoday.yestoday.core.follow.domain.Follow;
+import dev.yestoday.yestoday.core.follow.infrastructure.FollowRepository;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.dto.UserRequestDto;
 import dev.yestoday.yestoday.core.user.dto.UserResponseDto;
@@ -17,6 +19,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -26,6 +31,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final FollowRepository followRepository;
 
     @Transactional
     public UserResponseDto signup(UserRequestDto userRequestDto) {
@@ -33,7 +39,21 @@ public class AuthService {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
         User user = userRequestDto.toUser(passwordEncoder);
-        return UserResponseDto.of(userRepository.save(user));
+
+        User returnUser = userRepository.save(user);
+
+        Long userId = returnUser.getId();
+
+        Follow selfFollowing = new Follow(returnUser, userId, returnUser, userId);
+
+        followRepository.save(selfFollowing);
+//        List<Follow> selfFollowings = new ArrayList<>();
+//
+//        selfFollowings.add(selfFollowing);
+//
+//        returnUser.setFollowings(selfFollowings);
+
+        return UserResponseDto.of(returnUser);
     }
 
     @Transactional

@@ -24,6 +24,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<TokenDto> login(@RequestBody UserRequestDto userRequestDto) {
+        System.out.println("login 호출됨");
         return ResponseEntity.ok(authService.login(userRequestDto));
     }
 

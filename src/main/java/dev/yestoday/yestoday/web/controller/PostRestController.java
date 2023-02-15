@@ -9,6 +9,7 @@ import dev.yestoday.yestoday.core.post.domain.Post;
 import dev.yestoday.yestoday.core.user.dto.UserDTO;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,5 +50,15 @@ public class PostRestController {
     public void update(@RequestBody PostDTO updatePost){
         System.out.println(updatePost);
         postService.update(updatePost);
+    }
+
+    @GetMapping(path = "/todo/{todoId}")
+    public PostResponse findByTodoId(@PathVariable("todoId")Long todoId){
+        return postService.findByTodoId(todoId);
+    }
+
+    @GetMapping(path = "/feed/user/{userId}")
+    public Page<PostResponse> getFeed(@PathVariable Long userId, @RequestParam int page){
+        return postService.getFeed(userId, 2, page);
     }
 }

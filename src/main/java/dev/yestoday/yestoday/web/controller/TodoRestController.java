@@ -10,8 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -70,6 +72,16 @@ public class TodoRestController {
 
     }
 
+    @GetMapping("/test")
+    public void testInterceptor() {
+        log.info("testInterceptor");
+    }
+
+//    @GetMapping(path="tests/todo-date/{todoDate}")
+//    public void testRequest(@RequestAttribute ) {
+//        service.testRequest();
+//    }
+
     @GetMapping(path="users/{userId}/todo-date/{todoDate}")
     public List<Todo> findByUserIdAndTodoDate(@PathVariable("userId")Long userId, @PathVariable("todoDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate todoDate){
         return service.findByUserIdAndTodoDate(userId, todoDate);
@@ -81,8 +93,13 @@ public class TodoRestController {
     }
 
     @PutMapping(path="id/{todoId}/post")
-    public void updatePost(@PathVariable("todoId") Long todoId, @RequestParam("isPosted")boolean isPosted){
-        service.updatePost(todoId,isPosted);
+    public Todo updatePost(@PathVariable("todoId") Long todoId, @RequestParam("isPosted")boolean isPosted){
+        return service.updatePost(todoId,isPosted);
+    }
+
+    @GetMapping(path="/id/{todoId}")
+    public Todo findById(@PathVariable("todoId")Long todoId){
+        return service.findById(todoId);
     }
 
 

@@ -1,13 +1,14 @@
 package dev.yestoday.yestoday.core.todo.application;
 
-import dev.yestoday.yestoday.core.todo.dto.TodoDTO;
 import dev.yestoday.yestoday.core.todo.dto.TodoUpdateRequest;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.todo.domain.Todo;
 import dev.yestoday.yestoday.core.todo.infrastrucuture.TodoRepository;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,11 +59,15 @@ public class TodoService {
     }
 
     public List<Todo> findByUserIdAndTodoDate(Long userId, LocalDate todoDate){
-    
+
 
         List<Todo> todos = todoRepository.findByUserIdAndTodoDate(userId, todoDate);
 
         return todos;
+    }
+
+    public  void testRequest(HttpServletRequest request) {
+        request.getAttribute("user-id");
     }
 
     public List<Todo> findByUserIdAndIsPosted(Long userId, LocalDate todoDate){
@@ -78,13 +83,11 @@ public class TodoService {
         return notPostedTodos;
     }
 
-    public void updatePost(Long todoId, boolean isPosted){
+    public Todo updatePost(Long todoId, boolean isPosted){
         Todo updateTodo = todoRepository.findById(todoId).get();
         updateTodo.setPosted(isPosted);
 
         todoRepository.save(updateTodo);
-
+        return updateTodo;
     }
-
-
 }

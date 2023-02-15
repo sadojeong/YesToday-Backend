@@ -1,5 +1,6 @@
 package dev.yestoday.yestoday.core.comment.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.yestoday.yestoday.core.user.domain.User;
 import lombok.*;
 

@@ -42,6 +42,7 @@ public class SecurityConfig {
         //허용할 url 설정
         configuration.addAllowedOrigin("http://localhost:3000");
         // http://localhost:3000
+        configuration.addAllowedOrigin("http://54.92.33.225:8000");
 
         //허용할 헤더 설정
         configuration.addAllowedHeader("*");
@@ -89,7 +90,15 @@ public class SecurityConfig {
                     ,"http://localhost3000/Signin"
                     ,"/auth/**"
                     ,"/users/byemail/**"
+                    ,"54.92.33.225/signup"
+                    ,"54.92.33.225/signin"
                     ).permitAll()
+//            .antMatchers(
+//                    "http://localhost8080/auth/**"
+//                    ,"http://localhost3000/Signup"
+//                    ,"http://localhost3000/Signin",
+//                    "/auth/**"
+//                    ).permitAll()
             .anyRequest().authenticated()   // 나머지 API 는 전부 인증 필요
 
             // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용

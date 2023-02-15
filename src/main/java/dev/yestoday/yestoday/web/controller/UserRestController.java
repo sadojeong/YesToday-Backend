@@ -9,6 +9,10 @@ import dev.yestoday.yestoday.core.user.dto.UserFollowDTO;
 import dev.yestoday.yestoday.core.user.dto.UserResponseDto;
 import dev.yestoday.yestoday.core.user.util.SecurityUtil;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,8 +53,6 @@ public class UserRestController {
     @GetMapping("following-members/{id}")
     public List<UserFollowDTO> getFollowingsById(@PathVariable Long id) {return userService.getFollowingsById(id);}
 
-    @GetMapping("following-posts/{id}")
-    public List<FollowerRequest> getFollowingPostById(@PathVariable Long id) {return userService.getFollowingPostById(id);}
 
     @GetMapping("follower-members/{id}")
     public List<UserFollowDTO> getFollowersById(@PathVariable Long id) {return userService.getFollowersById(id);}
@@ -74,7 +76,11 @@ public class UserRestController {
     }
 
     @PutMapping
-    public void update(@RequestBody UserDTO updateUser) {userService.update(updateUser);}
+    public void update(@RequestBody UserDTO updateUser) {
+        System.out.println("update 호출됨");
+        System.out.println(updateUser);
+        userService.update(updateUser);
+    }
 
     @DeleteMapping("byid/{id}")
     public void delete(@PathVariable("id")Long id){

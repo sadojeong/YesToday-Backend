@@ -1,6 +1,7 @@
 package dev.yestoday.yestoday.core.todo.domain;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import dev.yestoday.yestoday.core.user.domain.User;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -47,6 +48,7 @@ public class Todo {
     private String todoDescription;
 
     @Column(name="todo_date",nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private LocalDate todoDate;
 
     @Column(name="is_posted")

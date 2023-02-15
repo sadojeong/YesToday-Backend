@@ -5,6 +5,7 @@ import dev.yestoday.yestoday.core.post.dto.PostResponse;
 import dev.yestoday.yestoday.core.user.domain.User;
 import dev.yestoday.yestoday.core.user.infrastructure.UserRepository;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @Data
+@Getter
 @NoArgsConstructor
 public class UserFollowDTO {
     private Long id;
