@@ -59,6 +59,6 @@ public class PostRestController {
 
     @GetMapping(path = "/feed/user/{userId}")
     public Page<PostResponse> getFeed(@PathVariable Long userId, @RequestParam int page){
-        return postService.getFeed(userId, 2, page);
+        return postService.getFeed(userId, 5, page);
     }
 }

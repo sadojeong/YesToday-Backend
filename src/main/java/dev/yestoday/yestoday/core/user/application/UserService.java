@@ -107,6 +107,7 @@ public class UserService {
 
         User user = userRepository.findById(id).orElseThrow(()->new NoSuchElementException());
         List<Follow> followings = user.getFollowings();
+        followings.remove(0);
 
         for (Follow following: followings
         ) {
@@ -124,6 +125,8 @@ public class UserService {
 
         List<Follow> followers = followRepository.findAllByFollowUser(user).orElseThrow(()->new NoSuchElementException("followers 정보를 받아올 수 없습니다."));
 
+
+        followers.remove(0);
         System.out.println(followers + " hhh");
         System.out.println(followers.size());
 
