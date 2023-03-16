@@ -44,16 +44,18 @@ Spring Data JPA, QueryDSL<br/>
 Spring Security, JWT<br/>
 Swagger<br/>
 MySQL, H2<br/>
+Tool : IntelliJ<br/>
 
 ### Front-end
 JavaScript<br/>
 React<br/>
 TailwindCSS<br/>
 Axios<br/>
+Tool : Visual Studio Code<br/>
 
 ### Collaboration
 Postman<br/>
-Notion, Slack<br/>
+Jira Software, Notion, Slack<br/>
 
 ### AWS Public Cloud Service
 EC2, RDS, S3<br/>
