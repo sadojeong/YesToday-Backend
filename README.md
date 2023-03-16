@@ -9,6 +9,10 @@ YesToday는 `Spring Boot`와 `React`를 기반으로 하는 웹 서비스 입니
 - 일상을 공유하고자 하는 욕구와 누군가에게 인정 받고 싶어하는 욕구를 동시에 자극할 수 있는 SNS를 만들고자 함
 
 ## 구현 결과
+시연 영상
+https://youtu.be/s6_1ptNKuW0
+<br/>
+<br/>
 회원가입/로그인 페이지
 ![회원](https://user-images.githubusercontent.com/85427126/224540728-84acb728-6735-4b78-947a-03d49df7a5dd.PNG)
 <br/>
